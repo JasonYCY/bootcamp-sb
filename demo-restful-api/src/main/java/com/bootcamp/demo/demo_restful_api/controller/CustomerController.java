@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @ResponseBody
 public class CustomerController {
-  @PostMapping("/customer")
-  public boolean createCustomer(@RequestBody Customer customer) {
-    return Database.customers.add(customer);
-  }
-
+  // Get
   @GetMapping("/customer")
   public Customer getCustomerByIndex(@RequestParam Integer index) {
     return Database.customers.get(index);
@@ -30,6 +26,13 @@ public class CustomerController {
     return Database.customers;
   }
 
+  // Post
+  @PostMapping("/customer")
+  public boolean createCustomer(@RequestBody Customer customer) {
+    return Database.customers.add(customer);
+  }
+
+  // Delete
   @DeleteMapping("/customer")
   public boolean deleteByName(@RequestParam String name) {
     return Database.customers.removeIf(customer -> customer.getName().equals(name));
