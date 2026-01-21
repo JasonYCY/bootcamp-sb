@@ -9,15 +9,17 @@ import com.bootcamp.demo.demo_external_api.dto.UserDto;
 import com.bootcamp.demo.demo_external_api.mapper.DtoMapper;
 import com.bootcamp.demo.demo_external_api.service.JsonPlaceHolderService;
 
-@RestController
+@RestController // Create Bean
 public class GovController implements GovOperation {
   @Autowired
   private JsonPlaceHolderService jsonPlaceHolderService;
+  @Autowired
+  private DtoMapper dtoMapper;
   
   @Override
   public List<UserDto> getJPHUsers() {
     return jsonPlaceHolderService.getUsers().stream()
-      .map(e -> DtoMapper.map(e))
+      .map(e -> dtoMapper.map(e))
       .collect(Collectors.toList());
   }
 
