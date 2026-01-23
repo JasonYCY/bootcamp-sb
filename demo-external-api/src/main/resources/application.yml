@@ -14,3 +14,11 @@ spring:
       ddl-auto: update
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
+
+external-api:
+  jsonplaceholder:
+    domain: "jsonplaceholder.typicode.com"
+    uri:
+      users: "/users"
+      posts: "/posts"
+      comments: "/comments"
