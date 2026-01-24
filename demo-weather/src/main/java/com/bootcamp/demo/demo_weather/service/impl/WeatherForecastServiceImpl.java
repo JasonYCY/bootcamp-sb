@@ -25,24 +25,24 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
   private WeatherForecastRepository weatherForecastRepository;
 
   @Override
-  public NineDayForecastDTO getNineDayWeathers() {
+  public List<WeatherForecastDTO> getNineDayWeathers() {
     NineDayForecastDTO nineDayForecastDTO = restTemplate.getForObject(url, NineDayForecastDTO.class);
+
     String updateTime = nineDayForecastDTO.getUpdateTime();
+    List<WeatherForecastDTO> weathers = nineDayForecastDTO.getWeatherForecast();
 
     // If (WeatherForecastRepository has no record with updateTime == updateTime in current External API call) {
-    //    Get List<WeatherForecastDTO> from nineDayForecastDTO
     //    Map List<WeatherForecastDTO> -> List<WeatherEntity>
     //    save to database (with spring boot JPA repository)
     // }
     if (weatherForecastRepository.findByDataUpdateTime(updateTime).size() == 0) {
-      List<WeatherForecastDTO> weathers = nineDayForecastDTO.getWeatherForecast();
       List<WeatherEntity> weatherEntities = weathers.stream()
         .map(e -> entityMapper.toWeatherEntity(e, updateTime))
         .toList();
       weatherForecastRepository.saveAll(weatherEntities);
     }
     
-    return nineDayForecastDTO;
+    return weathers;
   }
 
 

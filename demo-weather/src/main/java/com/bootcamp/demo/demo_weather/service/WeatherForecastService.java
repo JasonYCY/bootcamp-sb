@@ -1,8 +1,9 @@
 package com.bootcamp.demo.demo_weather.service;
 
-import com.bootcamp.demo.demo_weather.model.dto.NineDayForecastDTO;
+import java.util.List;
+import com.bootcamp.demo.demo_weather.model.dto.WeatherForecastDTO;
 
 public interface WeatherForecastService {
-  NineDayForecastDTO getNineDayWeathers();
+  List<WeatherForecastDTO> getNineDayWeathers();
   
 }

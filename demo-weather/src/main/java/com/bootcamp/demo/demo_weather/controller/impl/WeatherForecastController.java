@@ -19,7 +19,6 @@ public class WeatherForecastController implements WeatherForecastOperation {
   @Override
   public List<WeatherDto> getNineDayWeathers() {
     return weatherForecastService.getNineDayWeathers()
-      .getWeatherForecast()
       .stream()
       .map(e -> dtoMapper.toWeatherDto(e))
       .toList();
