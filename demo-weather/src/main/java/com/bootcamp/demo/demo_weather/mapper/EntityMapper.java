@@ -1,12 +1,13 @@
 package com.bootcamp.demo.demo_weather.mapper;
 
+import java.time.OffsetDateTime;
 import org.springframework.stereotype.Component;
 import com.bootcamp.demo.demo_weather.entity.WeatherEntity;
 import com.bootcamp.demo.demo_weather.model.dto.WeatherForecastDTO;
 
 @Component
 public class EntityMapper {
-  public WeatherEntity toWeatherEntity(WeatherForecastDTO weatherForecastDTO, String updateTime) {
+  public WeatherEntity toWeatherEntity(WeatherForecastDTO weatherForecastDTO, OffsetDateTime updateTime) {
     return WeatherEntity.builder()
       .forecastDate(weatherForecastDTO.getForecastDate())
       .week(weatherForecastDTO.getWeek())

@@ -13,7 +13,7 @@ public class DtoMapper {
 
   public WeatherDto toWeatherDto(WeatherForecastDTO weatherForecastDTO) {
     return WeatherDto.builder()
-      .forecastDate(dateFormatter.parse(weatherForecastDTO.getForecastDate()))
+      .forecastDate(weatherForecastDTO.getForecastDate())
       .maxTemp(weatherForecastDTO.getForecastMaxTemp().getValue())
       .minTemp(weatherForecastDTO.getForecastMinTemp().getValue())
       .maxRh(weatherForecastDTO.getForecastMaxRh().getValue())

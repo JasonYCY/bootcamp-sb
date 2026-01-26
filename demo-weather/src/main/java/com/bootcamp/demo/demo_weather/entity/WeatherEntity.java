@@ -1,5 +1,7 @@
 package com.bootcamp.demo.demo_weather.entity;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +24,8 @@ public class WeatherEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "forecast_date", length = 20)
-  private String forecastDate;
+  @Column(name = "forecast_date")
+  private LocalDate forecastDate;
 
   @Column(name = "week", length = 20)
   private String week;
@@ -52,8 +54,8 @@ public class WeatherEntity {
   @Column(name = "psr", length = 10)
   private String psr;
 
-  @Column(name = "data_update_time", length = 30)
-  private String dataUpdateTime; // From API's updateTime
+  @Column(name = "data_update_time")
+  private OffsetDateTime dataUpdateTime; // From API's updateTime
 
 
 

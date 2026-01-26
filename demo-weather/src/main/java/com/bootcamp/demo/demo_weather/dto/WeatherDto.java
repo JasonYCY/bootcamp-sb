@@ -1,5 +1,6 @@
 package com.bootcamp.demo.demo_weather.dto;
 
+import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,7 +16,7 @@ public class WeatherDto {
   // minRh -> 55
   // description -> "Sunny periods. Rather cool in the morning. Dry during the day."
 
-  private String forecastDate;
+  private LocalDate forecastDate;
   private Integer maxTemp;
   private Integer minTemp;
   private Integer maxRh;

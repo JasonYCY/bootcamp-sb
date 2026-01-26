@@ -1,6 +1,8 @@
 package com.bootcamp.demo.demo_weather.model.dto;
 
 import lombok.Getter;
+import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,8 @@ import lombok.Setter;
 public class WeatherForecastDTO {
 
   @JsonProperty("forecastDate")
-  private String forecastDate;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private LocalDate forecastDate;
 
   @JsonProperty("week")
   private String week;
