@@ -2,8 +2,12 @@ package com.bootcamp.demo.demo_weather.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import com.bootcamp.demo.demo_weather.entity.WeatherEntity;
 import com.bootcamp.demo.demo_weather.mapper.EntityMapper;
 import com.bootcamp.demo.demo_weather.model.dto.NineDayForecastDTO;
@@ -13,8 +17,22 @@ import com.bootcamp.demo.demo_weather.service.WeatherForecastService;
 
 @Service
 public class WeatherForecastServiceImpl implements WeatherForecastService {
-  private static String url = "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en";
+  // private static String url = "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en";
   
+  @Value(value = "${external-api.hk-observatory.domain}")
+  private String domain;
+
+  @Value(value = "${external-api.hk-observatory.weather.path-segment}")
+  private String pathSegment;
+
+  @Value(value = "${external-api.hk-observatory.weather.path}")
+  private String path;
+
+  @Value(value = "${external-api.hk-observatory.weather.dataset.nine-day}")
+  private String dataType;
+
+
+
   @Autowired
   private RestTemplate restTemplate;
 
@@ -26,8 +44,20 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
 
   @Override
   public List<WeatherForecastDTO> getNineDayWeathers() {
-    NineDayForecastDTO nineDayForecastDTO = restTemplate.getForObject(url, NineDayForecastDTO.class);
+    MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();
+    paramMap.put("dataType", List.of(dataType));
+    paramMap.put("lang", List.of("en"));
 
+    String url = UriComponentsBuilder.newInstance()
+      .scheme("https")
+      .host(domain)
+      .pathSegment(pathSegment)
+      .path(path)
+      .queryParams(paramMap)
+      .build()
+      .toString();
+
+    NineDayForecastDTO nineDayForecastDTO = restTemplate.getForObject(url, NineDayForecastDTO.class);
     String updateTime = nineDayForecastDTO.getUpdateTime();
     List<WeatherForecastDTO> weathers = nineDayForecastDTO.getWeatherForecast();
 
