@@ -11,13 +11,14 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.bootcamp.demo.demo_weather.entity.WeatherEntity;
 import com.bootcamp.demo.demo_weather.mapper.EntityMapper;
+import com.bootcamp.demo.demo_weather.model.Lang;
 import com.bootcamp.demo.demo_weather.model.dto.NineDayForecastDTO;
 import com.bootcamp.demo.demo_weather.model.dto.WeatherForecastDTO;
 import com.bootcamp.demo.demo_weather.repository.WeatherForecastRepository;
-import com.bootcamp.demo.demo_weather.service.WeatherForecastService;
+import com.bootcamp.demo.demo_weather.service.NineDayWeatherService;
 
 @Service
-public class WeatherForecastServiceImpl implements WeatherForecastService {
+public class NineDayWeatherServiceImpl implements NineDayWeatherService {
   // private static String url = "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en";
   
   @Value(value = "${external-api.hk-observatory.domain}")
@@ -44,10 +45,10 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
   private WeatherForecastRepository weatherForecastRepository;
 
   @Override
-  public List<WeatherForecastDTO> getNineDayWeathers() {
+  public List<WeatherForecastDTO> getWeathers(Lang lang) {
     MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();
     paramMap.put("dataType", List.of(dataType));
-    paramMap.put("lang", List.of("en"));
+    paramMap.put("lang", List.of(lang.getValue()));
 
     String url = UriComponentsBuilder.newInstance()
       .scheme("https")
