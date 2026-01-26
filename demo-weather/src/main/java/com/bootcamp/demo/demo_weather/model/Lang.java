@@ -18,7 +18,7 @@ public enum Lang {
     return Arrays.asList(Lang.values()).stream()
       .filter(e -> e.getValue().equals(lang))
       .findAny()
-      .orElseThrow(() -> new IllegalArgumentException("ENUM not Found."));
+      .orElseThrow(() -> new IllegalArgumentException("Invalid lang RequestParam."));
   }
 
 

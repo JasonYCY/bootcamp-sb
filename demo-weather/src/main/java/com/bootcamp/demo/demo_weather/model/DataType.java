@@ -17,7 +17,7 @@ public enum DataType {
     return Arrays.asList(DataType.values()).stream()
       .filter(e -> lang.equals(e.getValue()))
       .findAny()
-      .orElseThrow(() -> new IllegalArgumentException());
+      .orElseThrow(() -> new IllegalArgumentException("Invalid dataType RequestParam."));
   }
 
 
