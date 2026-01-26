@@ -1,0 +1,20 @@
+{"properties": [{
+  "name": "external-api.hk-observatory.weather.dataset.nine-day",
+  "type": "java.lang.String",
+  "description": "A description for 'external-api.hk-observatory.weather.dataset.nine-day'"
+},
+{
+  "name": "external-api.hk-observatory.weather.path",
+  "type": "java.lang.String",
+  "description": "A description for 'external-api.hk-observatory.weather.path'"
+},
+{
+  "name": "external-api.hk-observatory.weather.path-segment",
+  "type": "java.lang.String",
+  "description": "A description for 'external-api.hk-observatory.weather.path-segment'"
+},
+{
+  "name": "external-api.hk-observatory.domain",
+  "type": "java.lang.String",
+  "description": "A description for 'external-api.hk-observatory.domain'"
+}]}

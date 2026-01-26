@@ -14,3 +14,12 @@ spring:
       ddl-auto: update
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
+
+external-api:
+  hk-observatory:
+    domain: "data.weather.gov.hk"
+    weather:
+      path-segment: "weatherAPI/opendata"
+      path: "/weather.php"
+      dataset:
+        nine-day: "fnd"
