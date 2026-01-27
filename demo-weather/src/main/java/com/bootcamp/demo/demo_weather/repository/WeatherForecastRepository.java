@@ -13,5 +13,7 @@ public interface WeatherForecastRepository extends JpaRepository<WeatherEntity, 
   List<WeatherEntity> findByDataUpdateTime(LocalDateTime dataUpdateTime);
 
   List<WeatherEntity> findByForecastDate(LocalDate forecastDate);
+
+  List<WeatherEntity> findByForecastDateBetween(LocalDate start, LocalDate end);
   
 }
