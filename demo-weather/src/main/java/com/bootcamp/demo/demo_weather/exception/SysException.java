@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum SysException {
-  PARAM_NOT_MATCH(90000, "Parameters not match."),
-  GET_REQUEST_FAIL(90001, "Failed to retrieve data from Hong Kong Observatory API");
+  PARAM_NOT_MATCH(90000, "Parameters Not Match."),
+  REST_CLIENT_EX(90001, "Rest Client API Call Failed.");
 
   private int code;
   private String message;

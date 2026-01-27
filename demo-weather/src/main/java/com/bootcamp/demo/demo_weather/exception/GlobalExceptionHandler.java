@@ -17,8 +17,8 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(value = RestClientException.class)
   public ExceptionDTO handle(RestClientException e) {
     return ExceptionDTO.builder()
-      .code(SysException.GET_REQUEST_FAIL.getCode())
-      .message(SysException.GET_REQUEST_FAIL.getMessage() + " " + e.getMessage())
+      .code(SysException.REST_CLIENT_EX.getCode())
+      .message(SysException.REST_CLIENT_EX.getMessage() + " " + e.getMessage())
       .build();
   }
 
