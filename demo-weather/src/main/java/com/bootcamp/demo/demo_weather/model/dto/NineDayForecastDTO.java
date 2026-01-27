@@ -1,6 +1,6 @@
 package com.bootcamp.demo.demo_weather.model.dto;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,7 +25,7 @@ public class NineDayForecastDTO {
 
   @JsonProperty("updateTime")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Asia/Hong_Kong")
-  private OffsetDateTime updateTime;
+  private LocalDateTime updateTime;
 
 
 

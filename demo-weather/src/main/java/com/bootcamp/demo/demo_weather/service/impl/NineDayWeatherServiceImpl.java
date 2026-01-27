@@ -1,6 +1,6 @@
 package com.bootcamp.demo.demo_weather.service.impl;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,7 +60,7 @@ public class NineDayWeatherServiceImpl implements NineDayWeatherService {
       .toString();
 
     NineDayForecastDTO nineDayForecastDTO = restTemplate.getForObject(url, NineDayForecastDTO.class);
-    OffsetDateTime updateTime = nineDayForecastDTO.getUpdateTime();
+    LocalDateTime updateTime = nineDayForecastDTO.getUpdateTime();
     List<WeatherForecastDTO> weathers = nineDayForecastDTO.getWeatherForecast();
 
     // If (WeatherForecastRepository has no record with updateTime == updateTime in current External API call) {

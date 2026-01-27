@@ -1,7 +1,7 @@
 package com.bootcamp.demo.demo_weather.entity;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -55,7 +55,7 @@ public class WeatherEntity {
   private String psr;
 
   @Column(name = "data_update_time")
-  private OffsetDateTime dataUpdateTime; // From API's updateTime
+  private LocalDateTime dataUpdateTime; // From API's updateTime
 
 
 
