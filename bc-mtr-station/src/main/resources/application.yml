@@ -7,10 +7,17 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+    defer-datasource-initialization: true
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
+  sql:
+    init:
+      mode: always
 
+# spring.jpa.hibernate.ddl-auto=create
+# spring.jpa.defer-datasource-initialization=true
+# spring.sql.init.mode=always
 
 # spring:
 #   datasource: 
