@@ -38,7 +38,7 @@ public class TransportController implements TransportOperation {
 
   @Override
   public EarliestTrainsDto getEarliestTrainsByStation(String stationCode) {
-    throw new UnsupportedOperationException("This API is still under development!");
+    return transportService.getEarliestTrains(stationCode);
   }
 
 

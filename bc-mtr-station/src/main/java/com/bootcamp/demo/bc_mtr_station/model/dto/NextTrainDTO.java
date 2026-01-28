@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -55,6 +56,7 @@ public class NextTrainDTO {
   @Data
   @NoArgsConstructor
   @JsonIgnoreProperties(ignoreUnknown = true)
+  @ToString
   public static class TrainArrival {
 
     @JsonProperty("seq")
