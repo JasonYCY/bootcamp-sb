@@ -11,6 +11,25 @@ spring:
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
 
+
+# spring:
+#   datasource: 
+#     # 1. Update to the PostgreSQL driver
+#     driver-class-name: org.postgresql.Driver
+#     # 2. Update protocol to postgresql and default port to 5432
+#     url: "jdbc:postgresql://localhost:5432/bootcamp_2512"
+#     username: "postgres" # Default PostgreSQL user is often 'postgres'
+#     password: "admin1234"
+#   jpa:
+#     show-sql: true
+#     hibernate:
+#       ddl-auto: update
+#     properties:
+#       # 3. Update to the PostgreSQL dialect
+#       # Note: Hibernate 6+ often auto-detects this; you can usually remove this line entirely
+#       dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
 external-api:
   hk-mtr: 
     domain: "rt.data.gov.hk"
