@@ -2,10 +2,13 @@ package com.bootcamp.demo.bc_mtr_station.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,8 +22,10 @@ import com.bootcamp.demo.bc_mtr_station.dto.StationDetailDto;
 import com.bootcamp.demo.bc_mtr_station.dto.StationDto;
 import com.bootcamp.demo.bc_mtr_station.dto.TrainDto;
 import com.bootcamp.demo.bc_mtr_station.entity.StationEntity;
+import com.bootcamp.demo.bc_mtr_station.mapper.DateMapper;
 import com.bootcamp.demo.bc_mtr_station.mapper.DtoMapper;
 import com.bootcamp.demo.bc_mtr_station.model.dto.NextTrainDTO;
+import com.bootcamp.demo.bc_mtr_station.model.dto.NextTrainDTO.TrainArrival;
 import com.bootcamp.demo.bc_mtr_station.projection.LineStationProjection;
 import com.bootcamp.demo.bc_mtr_station.repository.LineRepository;
 import com.bootcamp.demo.bc_mtr_station.repository.LineRouteRepository;
@@ -53,6 +58,9 @@ public class TransportServiceImpl implements TransportService {
 
   @Autowired
   private DtoMapper dtoMapper;
+
+  @Autowired
+  private DateMapper dateMapper;
 
 
 
@@ -163,13 +171,46 @@ public class TransportServiceImpl implements TransportService {
         apiCurrTime = apiResponse.getCurrentTime();
         apiSysTime = apiResponse.getSystemTime();
       }
-
-      System.out.println("\nTEST - 1: " + apiResponse.getData().get(lineCode + "-" + stationCode).getUpTrains() + "\n");
-      System.out.println("\nTEST - 2: " + apiResponse.getData().get(lineCode + "-" + stationCode).getDownTrains() + "\n");
-      System.out.println("\nTEST - 3: " + allEarliestTrains + "\n");
+      
+      allEarliestTrains.addAll(extractAllEarliestTrains(apiResponse, lineCode, stationCode));
     }
 
-    throw new UnsupportedOperationException("This API is still under development!");
+    return EarliestTrainsDto.builder()
+      .currTime(dateMapper.mapToString(apiCurrTime))
+      .sysTime(dateMapper.mapToString(apiSysTime))
+      .currentStation(stationCode)
+      .trains(allEarliestTrains)
+      .build();
+  }
+
+  // helper method
+  private List<TrainDto> findEarliestTrainArrivals(List<TrainArrival> trainArrivals, String direction) {    
+    return trainArrivals.stream()
+      .collect(Collectors.toMap(
+        TrainArrival::getDestination,
+        Function.identity(),
+        (first, second) -> first.getArrivalTime().isBefore(second.getArrivalTime()) ? first : second,
+        LinkedHashMap::new  // Optional: preserves insertion order
+      ))
+      .values()
+      .stream()
+      .map(e -> dtoMapper.toTrainDto(e, direction))
+      .sorted(Comparator.comparing(TrainDto::getArrivalTime))
+      .collect(Collectors.toList());
+  }
+
+  private List<TrainDto> extractAllEarliestTrains(NextTrainDTO apiResponse, String lineCode, String stationCode) {
+    String key = lineCode + "-" + stationCode;
+    List<TrainDto> result = new ArrayList<>();
+
+    List<TrainArrival> upTrainArrivals = apiResponse.getData().get(key).getUpTrains();
+    List<TrainArrival> downTrainArrivals = apiResponse.getData().get(key).getDownTrains();
+
+    if (upTrainArrivals != null) result.addAll(findEarliestTrainArrivals(upTrainArrivals, "UP"));
+    if (downTrainArrivals != null) result.addAll(findEarliestTrainArrivals(downTrainArrivals, "DOWN"));
+
+    return result;
+
   }
 
 
