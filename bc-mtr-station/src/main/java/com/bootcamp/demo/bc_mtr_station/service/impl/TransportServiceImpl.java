@@ -83,8 +83,7 @@ public class TransportServiceImpl implements TransportService {
 
       LineWithStationsDto lineDto = result.computeIfAbsent(
         lineCode,
-        k -> new LineWithStationsDto(proj.getLineCode(),
-        proj.getLineDescription(), new ArrayList<>())
+        k -> new LineWithStationsDto(proj.getLineCode(), proj.getLineDescription(), new ArrayList<>())
       );
 
       StationDetailDto station = new StationDetailDto(
