@@ -4,6 +4,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.demo.bc_mtr_station.controller.TransportOperation;
+import com.bootcamp.demo.bc_mtr_station.dto.EarliestTrainsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineWithStationsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.StationDto;
 import com.bootcamp.demo.bc_mtr_station.model.dto.NextTrainDTO;
@@ -33,6 +34,11 @@ public class TransportController implements TransportOperation {
   @Override
   public LineWithStationsDto getStationsByLine(String line) {
     return transportService.getStationsByLine(line);
+  }
+
+  @Override
+  public EarliestTrainsDto getEarliestTrainsByStation(String stationCode) {
+    throw new UnsupportedOperationException("This API is still under development!");
   }
 
 

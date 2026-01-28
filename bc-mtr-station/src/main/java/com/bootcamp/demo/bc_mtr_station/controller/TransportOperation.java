@@ -4,6 +4,7 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.bootcamp.demo.bc_mtr_station.dto.EarliestTrainsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineWithStationsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.StationDto;
 import com.bootcamp.demo.bc_mtr_station.model.dto.NextTrainDTO;
@@ -21,6 +22,9 @@ public interface TransportOperation {
 
   @GetMapping("/mtr/stations/line/{line}")
   LineWithStationsDto getStationsByLine(@PathVariable String line);
+
+  @GetMapping("/mtr/earliest-trains/{stationCode}")
+  EarliestTrainsDto getEarliestTrainsByStation(@PathVariable String stationCode);
 
 
 

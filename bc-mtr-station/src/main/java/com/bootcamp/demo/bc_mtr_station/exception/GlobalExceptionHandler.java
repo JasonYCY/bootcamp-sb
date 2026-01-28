@@ -22,6 +22,14 @@ public class GlobalExceptionHandler {
       .build();
   }
 
+  @ExceptionHandler(value = UnsupportedOperationException.class)
+  public ExceptionDTO handle(UnsupportedOperationException e) {
+    return ExceptionDTO.builder()
+      .code(SysException.UNSUPPORTED_OPERATION.getCode())
+      .message(SysException.UNSUPPORTED_OPERATION.getMessage() + " " + e.getMessage())
+      .build();
+  }
+
 
 
 }

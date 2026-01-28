@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum SysException {
   PARAM_NOT_MATCH(90000, "Parameters Not Match."),
-  REST_CLIENT_EX(90001, "Rest Client API Call Failed.");
+  REST_CLIENT_EX(90001, "Rest Client API Call Failed."),
+  UNSUPPORTED_OPERATION(99999, "Unsupported Operation.");
 
   private int code;
   private String message;
