@@ -1,5 +1,6 @@
 package com.bootcamp.demo.bc_mtr_station.exception;
 
+import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.RestClientException;
@@ -27,6 +28,14 @@ public class GlobalExceptionHandler {
     return ExceptionDTO.builder()
       .code(SysException.UNSUPPORTED_OPERATION.getCode())
       .message(SysException.UNSUPPORTED_OPERATION.getMessage() + " " + e.getMessage())
+      .build();
+  }
+
+  @ExceptionHandler(value = HttpMessageConversionException.class)
+  public ExceptionDTO handle(HttpMessageConversionException e) {
+    return ExceptionDTO.builder()
+      .code(SysException.TYPE_DEFINITION_ERROR.getCode())
+      .message(SysException.TYPE_DEFINITION_ERROR.getMessage() + " " + e.getMessage())
       .build();
   }
 
