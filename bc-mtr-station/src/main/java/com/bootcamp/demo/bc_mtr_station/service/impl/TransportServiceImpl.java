@@ -49,18 +49,26 @@ public class TransportServiceImpl implements TransportService {
 
 
 
+  private NextTrainDTO callMtrApi(String lineCode, String stationCode) {
+    MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();
+    paramMap.put("line", List.of(lineCode));
+    paramMap.put("sta", List.of(stationCode));
+
+    String url = UriComponentsBuilder.newInstance()
+      .scheme("https")
+      .host(this.domain)
+      .pathSegment(this.pathSegment)
+      .path(this.path)
+      .queryParams(paramMap)
+      .build()
+      .toUriString();
+
+    return restTemplate.getForObject(url, NextTrainDTO.class);
+  }
+  
   @Override
   public NextTrainDTO getNextTrainSchedule(String line, String sta) {
-    MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();
-    paramMap.put("line", List.of(line));
-    paramMap.put("sta", List.of(sta));
-    String url = UriComponentsBuilder.newInstance().scheme("https")
-        .host(this.domain).pathSegment(this.pathSegment).path(this.path)
-        .queryParams(paramMap).build().toUriString();
-
-    NextTrainDTO nextTrainDTO =
-        restTemplate.getForObject(url, NextTrainDTO.class);
-    return nextTrainDTO;
+    return callMtrApi(line, sta);
   }
 
   @Override
