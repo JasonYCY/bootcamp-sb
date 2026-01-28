@@ -5,9 +5,11 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import com.bootcamp.demo.bc_mtr_station.entity.LineEntity;
 import com.bootcamp.demo.bc_mtr_station.projection.LineStationProjection;
 
+@Repository
 public interface LineRepository extends JpaRepository<LineEntity, Long> {
 
     Optional<LineEntity> findByLineCode(String lineCode);
