@@ -10,7 +10,7 @@ public class AppRunner implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    System.out.println("\n -= Hello from AppRunner =- \n");
+    System.out.println("\n -= AppRunner: Server Started =- \n");
   }
   
 }
