@@ -218,7 +218,7 @@ public class TransportServiceImpl implements TransportService {
         sys_time = dateMapper.mapToString(apiResponse.getSystemTime());
       }
       
-      boolean isDelayed = apiResponse.getIsDelay().equals("Y");
+      boolean isDelayed = "Y".equals(apiResponse.getIsDelay());
       if (isDelayed) delayedStations.add(stationCode);
     }
 
