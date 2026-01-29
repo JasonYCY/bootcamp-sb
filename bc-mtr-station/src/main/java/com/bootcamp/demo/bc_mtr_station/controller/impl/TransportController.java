@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.demo.bc_mtr_station.controller.TransportOperation;
 import com.bootcamp.demo.bc_mtr_station.dto.EarliestTrainsDto;
+import com.bootcamp.demo.bc_mtr_station.dto.LineSignalDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineWithStationsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.StationDto;
 import com.bootcamp.demo.bc_mtr_station.model.dto.NextTrainDTO;
@@ -39,6 +40,11 @@ public class TransportController implements TransportOperation {
   @Override
   public EarliestTrainsDto getEarliestTrainsByStation(String stationCode) {
     return transportService.getEarliestTrains(stationCode);
+  }
+  
+  @Override
+  public LineSignalDto getLineSignalByLineCode(String line) {
+    return transportService.getLineSignalByLineCode(line);
   }
 
 

@@ -17,6 +17,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.bootcamp.demo.bc_mtr_station.dto.EarliestTrainsDto;
+import com.bootcamp.demo.bc_mtr_station.dto.LineSignalDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineWithStationsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.StationDetailDto;
 import com.bootcamp.demo.bc_mtr_station.dto.StationDto;
@@ -183,6 +184,43 @@ public class TransportServiceImpl implements TransportService {
       .build();
   }
 
+  @Override
+  public LineSignalDto getLineSignalByLineCode(String line) {
+    List<String> stationCodes = stationRepository.findStationCodesByLineCode(line);
+
+    if (stationCodes.isEmpty()) {
+      throw new IllegalArgumentException("Line '" + line + "' does not have any stations or does not exist");
+    }
+
+    int delayCount = 0;
+    List<String> delayedStations = new ArrayList<>();
+    String curr_time = null;
+    String sys_time = null;
+
+    for (String stationCode : stationCodes) {
+      NextTrainDTO apiResponse = callMtrApi(line, stationCode);
+
+      if (curr_time == null || sys_time == null) {
+        curr_time = dateMapper.mapToString(apiResponse.getCurrentTime());
+        sys_time = dateMapper.mapToString(apiResponse.getSystemTime());
+      }
+      
+      boolean isDelayed = apiResponse.getIsDelay().equals("Y");
+      if (isDelayed) {
+        delayedStations.add(stationCode);
+        delayCount++;
+      }
+    }
+
+    return LineSignalDto.builder()
+      .line(line)
+      .signal(getSignal(delayCount))
+      .delayStation(delayedStations)
+      .curr_time(curr_time)
+      .sys_time(sys_time)
+      .build();
+  }
+
   // helper method
   private List<TrainDto> findEarliestTrainArrivals(List<TrainArrival> trainArrivals, String direction) {    
     return trainArrivals.stream()
@@ -213,6 +251,11 @@ public class TransportServiceImpl implements TransportService {
 
   }
 
+  private String getSignal(int delayCount) {
+    if (delayCount == 0) return "GREEN";
+    if (delayCount == 1) return "YELLOW";
+    return "RED";
+  }
 
 
 
