@@ -14,6 +14,10 @@ public interface TransportService {
 
   StationDto getStation(String sta);
 
+  boolean postStation(String sta, String line, String prev, String next);
+
+  boolean deleteStation(String sta);
+
   Map<String, LineWithStationsDto> getAllStationsGroupedByLine();
 
   LineWithStationsDto getStationsByLine(String line);

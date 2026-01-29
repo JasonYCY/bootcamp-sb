@@ -8,6 +8,7 @@ import com.bootcamp.demo.bc_mtr_station.controller.TransportOperation;
 import com.bootcamp.demo.bc_mtr_station.dto.EarliestTrainsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineSignalDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineWithStationsDto;
+import com.bootcamp.demo.bc_mtr_station.dto.ResponseMessageDto;
 import com.bootcamp.demo.bc_mtr_station.dto.StationDto;
 import com.bootcamp.demo.bc_mtr_station.model.dto.NextTrainDTO;
 import com.bootcamp.demo.bc_mtr_station.service.TransportService;
@@ -26,6 +27,24 @@ public class TransportController implements TransportOperation {
   @Override
   public StationDto getStation(String sta) {
     return transportService.getStation(sta);
+  }
+
+  @Override
+  public ResponseMessageDto postStation(String sta, String line, String prev, String next) {
+    boolean isPostSuccess = transportService.postStation(sta, line, prev, next);
+    
+    return ResponseMessageDto.builder()
+    .message(isPostSuccess ? "Post Station Succeeded" : "Post Station Failed")
+    .build();
+  }
+  
+  @Override
+  public ResponseMessageDto deleteStation(String sta) {
+    boolean isPostSuccess = transportService.deleteStation(sta);
+    
+    return ResponseMessageDto.builder()
+    .message(isPostSuccess ? "Delete Station Succeeded" : "Delete Station Failed")
+    .build();
   }
 
   @Override

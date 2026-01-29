@@ -98,6 +98,20 @@ public class TransportServiceImpl implements TransportService {
   }
 
   @Override
+  public boolean postStation(String sta, String line, String prev, String next) {
+    // todo
+
+    throw new UnsupportedOperationException("This API is still under development!");
+  }
+
+  @Override
+  public boolean deleteStation(String sta) {
+    // todo
+
+    throw new UnsupportedOperationException("This API is still under development!");
+  }
+
+  @Override
   public Map<String, LineWithStationsDto> getAllStationsGroupedByLine() {
     List<LineStationProjection> projections = lineRepository.findAllLineStationProjections();
     Map<String, LineWithStationsDto> result = new LinkedHashMap<>();
