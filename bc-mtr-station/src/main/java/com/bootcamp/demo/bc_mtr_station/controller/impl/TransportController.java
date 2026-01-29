@@ -1,5 +1,6 @@
 package com.bootcamp.demo.bc_mtr_station.controller.impl;
 
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +46,11 @@ public class TransportController implements TransportOperation {
   @Override
   public LineSignalDto getLineSignalByLineCode(String line) {
     return transportService.getLineSignalByLineCode(line);
+  }
+
+  @Override
+  public List<LineSignalDto> getAllLineSignals() {
+    return transportService.getAllLineSignals();
   }
 
 

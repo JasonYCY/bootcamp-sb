@@ -14,6 +14,9 @@ public interface LineRepository extends JpaRepository<LineEntity, Long> {
 
     Optional<LineEntity> findByLineCode(String lineCode);
 
+    @Query("SELECT l.lineCode FROM LineEntity l")
+    List<String> findAllLineCode();
+
     boolean existsByLineCode(String lineCode);
 
     /**

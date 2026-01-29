@@ -1,5 +1,6 @@
 package com.bootcamp.demo.bc_mtr_station.controller;
 
+import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,9 @@ public interface TransportOperation {
 
   @GetMapping("/line/signal")
   LineSignalDto getLineSignalByLineCode(@RequestParam String line);
+
+  @GetMapping("/line/signals")
+  List<LineSignalDto> getAllLineSignals();
 
 
 

@@ -221,6 +221,18 @@ public class TransportServiceImpl implements TransportService {
       .build();
   }
 
+  @Override
+  public List<LineSignalDto> getAllLineSignals() {
+    List<String> lineCodes = lineRepository.findAllLineCode();
+    List<LineSignalDto> result = new ArrayList<>();
+
+    for (String lineCode : lineCodes) {
+      result.add(getLineSignalByLineCode(lineCode));
+    }
+
+    return result;
+  }
+
   // helper method
   private List<TrainDto> findEarliestTrainArrivals(List<TrainArrival> trainArrivals, String direction) {    
     return trainArrivals.stream()
