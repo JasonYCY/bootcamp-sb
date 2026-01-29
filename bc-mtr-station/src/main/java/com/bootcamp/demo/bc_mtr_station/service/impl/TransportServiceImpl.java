@@ -206,7 +206,6 @@ public class TransportServiceImpl implements TransportService {
       throw new IllegalArgumentException("Line '" + line + "' does not have any stations or does not exist");
     }
 
-    int delayCount = 0;
     List<String> delayedStations = new ArrayList<>();
     String curr_time = null;
     String sys_time = null;
@@ -220,15 +219,12 @@ public class TransportServiceImpl implements TransportService {
       }
       
       boolean isDelayed = apiResponse.getIsDelay().equals("Y");
-      if (isDelayed) {
-        delayedStations.add(stationCode);
-        delayCount++;
-      }
+      if (isDelayed) delayedStations.add(stationCode);
     }
 
     return LineSignalDto.builder()
       .line(line)
-      .signal(getSignal(delayCount))
+      .signal(getSignal(delayedStations.size()))
       .delayStation(delayedStations)
       .curr_time(curr_time)
       .sys_time(sys_time)
