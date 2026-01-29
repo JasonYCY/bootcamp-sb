@@ -7,6 +7,7 @@ public enum SysException {
   PARAM_NOT_MATCH(90000, "Parameters Not Match."),
   REST_CLIENT_EX(90001, "Rest Client API Call Failed."),
   TYPE_DEFINITION_ERROR(90002, "HTTP Message Conversion Failed."),
+  RESOURCE_NOT_FOUND(90003, "Resource Not Found."),
   UNSUPPORTED_OPERATION(99999, "Unsupported Operation.");
 
   private int code;
