@@ -12,12 +12,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.bootcamp.demo.bc_mtr_station.codelib.RedisManager;
 import com.bootcamp.demo.bc_mtr_station.dto.EarliestTrainsDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineSignalDto;
 import com.bootcamp.demo.bc_mtr_station.dto.LineWithStationsDto;
@@ -34,7 +34,6 @@ import com.bootcamp.demo.bc_mtr_station.repository.LineRepository;
 import com.bootcamp.demo.bc_mtr_station.repository.LineRouteRepository;
 import com.bootcamp.demo.bc_mtr_station.repository.StationRepository;
 import com.bootcamp.demo.bc_mtr_station.service.TransportService;
-import tools.jackson.databind.ObjectMapper;
 
 @Service
 public class TransportServiceImpl implements TransportService {
@@ -67,10 +66,7 @@ public class TransportServiceImpl implements TransportService {
   private DateMapper dateMapper;
 
   @Autowired
-  private RedisTemplate<String, String> redisTemplate;
-
-  @Autowired
-  private ObjectMapper objectMapper;
+  private RedisManager redisManager;
 
 
 
@@ -99,33 +95,29 @@ public class TransportServiceImpl implements TransportService {
   @Override
   public StationDto getStation(String sta) {
     // read redis
-    String json = redisTemplate.opsForValue().get(sta);
+    Optional<StationDto> redisResult = redisManager.get(sta, StationDto.class);
+    StationDto value = null;
 
-    StationDto result = null;
+    if (redisResult.isEmpty()) {
+      // if not found in redis
+      System.out.println("\n [Get Station: data NOT found in Redis] \n");
 
-    // if redis not found
-    if (json == null) {
       // read database
       Optional<StationEntity> optionalStation = stationRepository.findByStationCode(sta);
       if (optionalStation.isEmpty()) throw new IllegalArgumentException("Invalid station PathVariable.");
-      result = dtoMapper.toStationDto(optionalStation.get());
+      value = dtoMapper.toStationDto(optionalStation.get());
 
       // write back to redis
-      String jsonForWrite = objectMapper.writeValueAsString(result);
-      redisTemplate.opsForValue().set(sta, jsonForWrite, Duration.ofSeconds(30L));
-
-      System.out.println("\n [Get Station: data NOT found in Redis] \n");
-      
+      redisManager.set(sta, value, Duration.ofSeconds(10L));
     } else {
-      // if redis found, return redis data
-      // json (String) -> LineEntity (Deserialization)
-      result = objectMapper.readValue(json, StationDto.class); // Risky
-
+      // if found in redis
       System.out.println("\n [Get Station: data found in Redis] \n");
-      
+
+      // read the value from Optional object
+      value = redisResult.get();
     }
 
-    return result;
+    return value;
   }
 
   @Override
