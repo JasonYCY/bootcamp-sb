@@ -83,7 +83,7 @@
       }
 
       /* Price Formatting */
-      td:last-child {
+      td:nth-child(3), td:nth-child(4) {
         font-family: "Courier New", Courier, monospace;
         font-weight: bold;
         color: #27ae60;
@@ -110,6 +110,7 @@
           <th>Image</th>
           <th>Coin ID</th>
           <th>Current Price (USD)</th>
+          <th>Total Volume</th>
         </tr>
         <tr></tr>
       </thead>
@@ -120,6 +121,7 @@
           </td>
           <td th:text="${coinData.id}"></td>
           <td th:text="${coinData.currentPrice}"></td>
+          <td th:text="${coinData.formattedTotalVolume}"></td>
         </tr>
       </tbody>
     </table>

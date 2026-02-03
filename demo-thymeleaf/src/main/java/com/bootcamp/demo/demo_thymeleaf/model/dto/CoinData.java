@@ -102,6 +102,15 @@ public class CoinData {
     private Double percentage;
   }
 
+  public String getFormattedTotalVolume() {
+    if (totalVolume == null) return "0";
+    if (totalVolume >= 1_000_000_000) 
+      return String.format("%.2fB", totalVolume / 1_000_000_000.0);
+    if (totalVolume >= 1_000_000) 
+      return String.format("%.2fM", totalVolume / 1_000_000.0);
+    return totalVolume.toString();
+  }
+
 
 
 }

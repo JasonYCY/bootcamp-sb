@@ -33,6 +33,7 @@ public class HelloWorldController {
   @GetMapping("/external-data")
   public String displayExternalData(Model model) {
     List<CoinData> coinDataList = apiService.fetchCoinDataMock();
+    // coinDataList.sort((e1, e2) -> (int) (e2.getMarketCap() - e1.getMarketCap()));
     model.addAttribute("coinDataList", coinDataList);
     return "externaldata"; // Thymeleaf template name (coindata.html)
   }
