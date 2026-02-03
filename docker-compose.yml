@@ -1,0 +1,38 @@
+services:
+  bc-mtr-station:
+    image: bc-mtr-station:0.0.1
+    container_name: bc-mtr-station
+    networks:
+      - bootcamp-network
+    ports:
+      - "8181:8081"
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin1234
+      POSTGRES_DB: bootcamp_2512
+      # PGDATA: /var/lib/postgresql/data/pgdata15     # Removed PGDATA custom path to keep it simple and standard
+    networks:
+      - bootcamp-network
+    ports:
+      - "5532:5432"
+    volumes:
+      - "./pgdata:/var/lib/postgresql/data/pgdata"
+
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    networks:
+      - bootcamp-network
+    ports:
+      - "6479:6379"
+    volumes:
+      - "./redis_data:/data"
+
+# This part is MANDATORY
+networks:
+  bootcamp-network:
+    driver: bridge
