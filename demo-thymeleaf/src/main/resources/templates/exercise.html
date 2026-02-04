@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 5</title>
+
+    <link rel="stylesheet" th:href="@{/css/exercise.css}" />
+  </head>
+
+  <body>
+    <h1>Coingecko Coin Data</h1>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        id="coinFilter"
+        placeholder="Search By Coin ID"
+      />
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Coin</th>
+          <th>Current Price</th>
+          <th>Price Change (24h)</th>
+          <th>Market Capitalization</th>
+        </tr>
+        <tr></tr>
+      </thead>
+
+      <tbody id="coinBody">
+        <tr
+          th:each="coinData : ${coinDataList}"
+          class="coinRow"
+          th:id="${coinData.id}"
+        >
+          <td class="col-coin">
+            <div class="coin-info">
+              <img th:src="${coinData.image}" alt="Coin Image" height="30" />
+              <div class="coin-name-wrapper">
+                <span class="coin-name" th:text="${coinData.name}"></span>
+                <span
+                  class="coin-symbol dark-green-text"
+                  th:text="${#strings.toUpperCase(coinData.symbol)}"
+                ></span>
+              </div>
+            </div>
+            <div class="coin-updated">
+              <span
+                th:text="${#temporals.format(coinData.lastUpdated, 'yyyy-MM-dd HH:mm:ss')}"
+              ></span>
+              <span>HKT</span>
+            </div>
+          </td>
+
+          <!-- Added semantic class col-price -->
+          <td
+            class="col-price dark-green-text"
+            th:text="${'$' + #numbers.formatDecimal(coinData.currentPrice, 1, 'COMMA', 3, 'POINT')}"
+          ></td>
+
+          <!-- Added semantic class col-change -->
+          <td
+            th:with="pc=${coinData.priceChangePercentage24h}"
+            th:class="'col-change ' + ${pc > 0 ? 'price-up' : (pc < 0 ? 'price-down' : 'price-unchanged')}"
+            th:text="${(pc > 0 ? '⮝ ' : (pc < 0 ? '⮟ ' : '')) + #numbers.formatDecimal(T(java.lang.Math).abs(pc), 1, 'COMMA', 2, 'POINT') + '%'}"
+          ></td>
+
+          <!-- Added semantic class col-marketcap -->
+          <td
+            class="col-marketcap dark-green-text"
+            th:text="${'$' + #numbers.formatInteger(coinData.marketCap, 1, 'COMMA')}"
+          ></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

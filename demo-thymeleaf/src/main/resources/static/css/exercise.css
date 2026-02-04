@@ -1,0 +1,156 @@
+/* General Layout */
+body {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  padding: 40px 5%; /* Changed to percentage for better wide-screen spacing */
+  line-height: 1.5;
+}
+
+h1 {
+  text-align: center;
+  color: #0f172a;
+  margin-bottom: 30px;
+}
+
+/* Search Bar */
+.form-group {
+  max-width: 500px;
+  margin: 0 auto 30px auto;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  max-width: 1300px; /* Increased from 1000px to make it wider */
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+th {
+  background-color: rgb(133, 106, 215);
+  color: #fcfcfc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 24px;
+}
+
+td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+/* Specific Column Alignment */
+.col-price,
+.col-change,
+.col-marketcap {
+  text-align: right;
+  font-family:
+    'JetBrains Mono', 'Fira Code', monospace; /* Good for alignment */
+}
+
+/* Align Headers to match the Data */
+th:nth-child(2),
+th:nth-child(3),
+th:nth-child(4) {
+  text-align: right;
+}
+
+/* Coin Info Section */
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coin-name-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.coin-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.coin-symbol {
+  color: #64748b;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.coin-updated {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 4px;
+  font-style: italic;
+
+  /* Ensures text stays on the left */
+  text-align: left;
+
+  /* Ensures spans stay together on one line */
+  display: block;
+}
+
+.coin-updated span {
+  margin-right: 4px;
+}
+
+/* Change Colors */
+.price-up {
+  color: #10b981;
+}
+.price-down {
+  color: #ef4444;
+}
+.price-unchanged {
+  color: #94a3b8;
+}
+
+/* Row Hover Effect */
+.coinRow:hover {
+  background-color: #f8fafc;
+  transition: background-color 0.2s;
+}
+
+/* Last row shouldn't have a border */
+tr:last-child td {
+  border-bottom: none;
+}
+
+.dark-green-text {
+  color: rgb(6, 111, 111);
+}

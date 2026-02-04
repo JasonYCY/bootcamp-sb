@@ -37,6 +37,14 @@ public class HelloWorldController {
     model.addAttribute("coinDataList", coinDataList);
     return "externaldata"; // Thymeleaf template name (coindata.html)
   }
+
+
+  @GetMapping("/exercise")
+  public String displayExercise(Model model) {
+    List<CoinData> coinDataList = apiService.fetchCoinDataMock();
+    model.addAttribute("coinDataList", coinDataList);
+    return "exercise"; // Thymeleaf template name (exercise.html)
+  }
   
   
   
