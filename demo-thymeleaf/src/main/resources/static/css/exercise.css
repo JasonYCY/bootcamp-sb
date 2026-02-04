@@ -80,6 +80,11 @@ td {
     'JetBrains Mono', 'Fira Code', monospace; /* Good for alignment */
 }
 
+/* Zebra Striping */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
 /* Align Headers to match the Data */
 th:nth-child(2),
 th:nth-child(3),
