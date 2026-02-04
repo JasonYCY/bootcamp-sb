@@ -1,7 +1,3 @@
-var script = document.createElement('script')
-script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'
-document.getElementsByTagName('head')[0].appendChild(script)
-
 window.onload = function () {
   // reloadCoins()
   console.log('The page has been loaded!')
