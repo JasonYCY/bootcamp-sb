@@ -6,6 +6,7 @@
     <title>Exercise 5</title>
 
     <link rel="stylesheet" th:href="@{/css/exercise.css}" />
+    <script th:src="@{/js/exercise.js}"></script>
   </head>
 
   <body>
@@ -18,6 +19,23 @@
         id="coinFilter"
         placeholder="Search By Coin ID"
       />
+    </div>
+
+    <div class="action-container">
+      <!-- Top Row: All Actions -->
+      <div class="button-group">
+        <button id="refreshButton" onclick="reloadCoins()">Refresh Now</button>
+        <button id="toggleAutoButton" onclick="toggleAutoUpdate()">
+          Start Auto-Refresh
+        </button>
+      </div>
+
+      <!-- Bottom Row: All Status Info -->
+      <div class="status-group">
+        <div id="status">Ready to refresh</div>
+        <div class="status-divider">|</div>
+        <div id="autoStatus">Auto-Refresh: OFF</div>
+      </div>
     </div>
 
     <table>

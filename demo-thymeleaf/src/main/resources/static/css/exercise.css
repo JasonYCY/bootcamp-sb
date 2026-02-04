@@ -154,3 +154,173 @@ tr:last-child td {
 .dark-green-text {
   color: rgb(6, 111, 111);
 }
+
+/* Action Container (Button & Status) */
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 35px;
+}
+
+/* Refresh Button */
+#refreshButton {
+  background-color: rgb(106, 215, 182);
+  color: #ffffff;
+  border: none;
+  padding: 12px 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(133, 106, 215, 0.2);
+}
+
+#refreshButton:hover {
+  background-color: rgb(89, 171, 146);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 10px -1px rgba(133, 106, 215, 0.3);
+}
+
+#refreshButton:active {
+  transform: translateY(0);
+}
+
+/* Styling for the button when JavaScript sets btn.disabled = true */
+#refreshButton:disabled {
+  background-color: #e2e8f0; /* Light gray background */
+  color: #94a3b8; /* Muted text color */
+  cursor: wait; /* Change cursor to loading/wait spinner */
+  transform: none; /* Remove any hover lift effects */
+  box-shadow: none; /* Remove shadow to look "flat" and inactive */
+  border: 1px solid #cbd5e1;
+
+  /* Optional: Pulse animation to show it's working */
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* The pulse animation logic */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Status Text */
+#status {
+  font-size: 0.85rem;
+  color: #64748b;
+  min-height: 1.2rem; /* Prevents jumping when text changes */
+}
+
+/* Container for buttons */
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+/* Base style for the Toggle Button */
+#toggleAutoButton {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+/* State: When Auto-Refresh is ACTIVE */
+#toggleAutoButton.btn-active {
+  background-color: #fee2e2; /* Light red */
+  color: #ef4444; /* Red text */
+  border-color: #fecaca;
+}
+
+/* Base style for Auto Status text */
+#autoStatus {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #94a3b8; /* Default Gray (OFF) */
+  margin-top: 5px;
+  transition: color 0.3s ease;
+}
+
+/* State: When Auto-Status text is ACTIVE */
+#autoStatus.status-on {
+  color: #10b981; /* Green (ON) */
+}
+
+/* Container for the whole control section */
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 0 auto 10px auto;
+  padding: 0;
+  /* background: #ffffff; */
+  border-radius: 12px;
+  max-width: 600px;
+  /* border: 1px solid #e2e8f0; */
+}
+
+/* Container for the status row */
+.status-group {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Take up full width of the action-container */
+  max-width: 500px; /* Optional: limit the total width of the status bar */
+  padding: 8px 16px;
+  background-color: #f8fafc;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+}
+
+/* Force both sides to take up exactly 50% */
+#status,
+#autoStatus {
+  flex: 1; /* This is the magic line */
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.03em;
+}
+
+/* Align the left text to the left */
+#status {
+  text-align: right;
+}
+
+/* Align the right text to the right */
+#autoStatus {
+  text-align: left;
+}
+
+/* Keep the divider in the middle */
+.status-divider {
+  color: #cbd5e1;
+  font-weight: 300;
+  padding: 0 10px;
+}
+
+/* Button enhancements */
+.button-group {
+  margin-bottom: 0; /* Remove old margin */
+}
+
+#refreshButton,
+#toggleAutoButton {
+  min-width: 160px; /* Ensures consistent button sizing */
+}
