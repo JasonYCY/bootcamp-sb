@@ -10,5 +10,8 @@ public interface CoinGeckoOperation {
 
   @GetMapping("/market/mock")
   public List<CoinData> getMarketMock();
+
+  @GetMapping("/refresh")
+  public List<CoinData> refresh();
   
 }

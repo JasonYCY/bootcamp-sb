@@ -22,6 +22,11 @@ public class CoinGeckoController implements CoinGeckoOperation {
   public List<CoinData> getMarketMock() {
     return apiService.fetchCoinDataMock();
   }
+
+  @Override
+  public List<CoinData> refresh() {
+    return apiService.fetchCoinDataMock();
+  }
   
 
 
