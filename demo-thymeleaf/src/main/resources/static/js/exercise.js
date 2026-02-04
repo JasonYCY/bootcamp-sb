@@ -148,8 +148,10 @@ async function reloadCoins() {
       status.textContent = `Loaded ${coins.length} coins`
     }, 1000)
   } catch (error) {
-    status.textContent = 'Error loading data: ' + error.message
-    console.error('Fetch Error:', error)
+    setTimeout(() => {
+      status.textContent = 'Error loading data: ' + error.message
+      console.error('Fetch Error:', error)
+    }, 1000)
   } finally {
     setTimeout(() => {
       btn.disabled = false
