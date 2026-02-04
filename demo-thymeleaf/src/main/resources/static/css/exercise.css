@@ -113,8 +113,8 @@ th:nth-child(4) {
 
 .coin-symbol {
   color: #64748b;
-  font-size: 0.85em;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .coin-updated {

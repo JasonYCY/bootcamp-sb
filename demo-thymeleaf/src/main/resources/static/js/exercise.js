@@ -157,5 +157,6 @@ async function reloadCoins() {
       btn.disabled = false
     }, 1000)
     addFilter() // Re-initialize filter for new rows
+    document.getElementById('coinFilter').dispatchEvent(new Event('input'))
   }
 }
