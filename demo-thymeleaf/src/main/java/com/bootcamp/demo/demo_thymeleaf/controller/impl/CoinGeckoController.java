@@ -10,7 +10,7 @@ import com.bootcamp.demo.demo_thymeleaf.service.ApiService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080") // Add this line
+@CrossOrigin // Add this line
 public class CoinGeckoController implements CoinGeckoOperation {
   @Autowired
   private ApiService apiService;
