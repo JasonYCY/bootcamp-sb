@@ -13,5 +13,8 @@ public interface CoinGeckoOperation {
 
   @GetMapping("/refresh")
   public List<CoinData> refresh();
+
+  @GetMapping("/crypto/api/v1/coin/market")
+  public List<CoinData> getDataForVue();
   
 }
